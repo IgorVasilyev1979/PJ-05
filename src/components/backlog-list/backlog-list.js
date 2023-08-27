@@ -1,17 +1,17 @@
 import React from 'react'
-import BackLogListItem from '../backlog-list-item/backlog-list-item';
+import ListItem from '../list-item/list-item';
+import BacklogInputButton from '../backlog-input-button/backlog-input-button';
 
-const BackLogList = ({data}) => {
-    console.log(data);
+const BackLogList = ({data, addTask, setBacklogListEmptyFalse, setBacklogListEmptyTrue}) => {
     return (
         <>
-            <div>{data.title}</div>
-            {/* <BackLogListItem name={ data.issues[0].name } id={ data.issues[0].id } />
-            <BackLogListItem name={ data.issues[1].name } id={ data.issues[1].id } />
-            <BackLogListItem name={ data.issues[2].name } id={ data.issues[2].id } /> */}
-            {data.issues.map(issue => (
-                <BackLogListItem name={ issue.name } id={ issue.id } />
-            ))}
+            <div className="backlog-list list">
+                <div>Backlog</div>
+                {data.map(task => (
+                    task.list === 'backlog' && <ListItem name={ task.name } id={ task.id } />
+                ))}
+                <BacklogInputButton addTask={addTask}/>
+            </div>
         </>
     );
 };

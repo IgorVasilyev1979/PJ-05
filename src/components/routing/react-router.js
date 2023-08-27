@@ -5,41 +5,26 @@ import PageNotFound from '../page-not-found/page-not-found';
 import ListsBoard from '../lists-board/lists-board';
 import TaskDescription from '../task-description/task-description';
 
-/* const Home = () => <div></div>
-const About = () => <div>
-                        About
-                        <ShowLocationInfoWithRouter />
-                        <Link to="/blog-posts">BlogPosts</Link>
-                    </div>
-const Post = () => <div>Post</div>                    
-const BlogPosts = (props) => <div>
-                            BlogPosts
-                            <Route path={`${props.match.url}/post`} component={Post} />
-                        </div> */
-
 class ReactRouter extends React.Component {
-    /* constructor(props) {
-        super(props);
-        console.log(this.props.data);
-    } */
+    
     render() {
         const { data } = this.props;
+        const { addTask } = this.props;
+        const { readyAddTask } = this.props;
+        const { inProgressAddTask } = this.props;
+        const { finishedAddTask } = this.props;
+        const { isBacklogNotEmpty } = this.props;
+        const { isReadyNotEmpty } = this.props;
+        const { isInProgressNotEmpty } = this.props;
         return (
             <Router>
-                {/* <div>
-                    <ul>
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/about">About</Link></li>
-                        <li><Link to="/blog-posts">BlogPosts</Link></li>
-                    </ul> */}
-
+                <main className="main">
                     <Switch>
-                        {/* <Route path="/" exact component={ListsBoard} />  */}
-                        <Route path="/" exact render={(dataMock) => <ListsBoard data={data} />} />
-                        <Route path="/tasks" component={TaskDescription} />
+                        <Route path="/" exact render={() => <ListsBoard data={data} addTask={addTask} readyAddTask={readyAddTask} inProgressAddTask={inProgressAddTask} finishedAddTask={finishedAddTask} isBacklogNotEmpty={isBacklogNotEmpty} isReadyNotEmpty={isReadyNotEmpty} isInProgressNotEmpty={isInProgressNotEmpty} />} />
+                        <Route path="/tasks" render={() => <TaskDescription data={data} />} />
                         <Route path="*" component={PageNotFound} />
                     </Switch>
-                {/* </div> */}
+                </main>    
             </Router>
             
         );
